@@ -1,18 +1,26 @@
-import { GlobalContext } from '../contexts/global'
+import { ThemeContextProvider } from '../contexts/theme'
 import Header from '../components/header'
 import Content from '../components/content'
-import { useState } from 'react'
+
+
+import styled from 'styled-components';
 
 export default function App() {
-
-    const [dark, setDark] = useState(false)
-
     return (
         <>
-            <GlobalContext.Provider value={{ dark, setDark }}>
-                <Header />
-                <Content />
-            </GlobalContext.Provider>
+            <ThemeContextProvider>
+                <Container>
+                    <Header />
+                    <Content />
+
+                </Container>
+            </ThemeContextProvider>
+
         </>
     )
 }
+
+const Container = styled.div`
+    height: 100vh;
+    background-color: ${props => props.theme.content.bgColor};
+`
